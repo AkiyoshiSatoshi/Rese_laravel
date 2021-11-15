@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -20,7 +22,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', [GenreController::class, 'index']);
+
 Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/shop/{shop_id}', [ShopController::class, 'shopdetail']);
+
+Route::post('/reserve', [ReserveController::class, 'store']);
+
+
 Route::get('/admin/test', [AdminController::class, 'adminedit']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
