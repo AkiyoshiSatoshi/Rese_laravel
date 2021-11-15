@@ -13,4 +13,13 @@ class Shop extends Model
     {
         return $this->hasMany(Like::class,'user_id');
     }
+
+    public function areas()
+    {
+        return $this->belongsTo(Area::class,'area_id');
+    }
+    public function genres()
+    {
+        return $this->belongsTo(Genre::class,'genre_id');
+    }
 }
