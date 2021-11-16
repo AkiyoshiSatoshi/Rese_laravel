@@ -27,7 +27,8 @@ Route::get('/test', [GenreController::class, 'index']);
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('/shop/{shop_id}', [ShopController::class, 'shopdetail']);
 
-Route::post('/reserve', [ReserveController::class, 'store']);
+//予約機能
+Route::get('/reserve', [ReserveController::class, 'store']);
 
 
 Route::get('/admin/test', [AdminController::class, 'adminedit']);

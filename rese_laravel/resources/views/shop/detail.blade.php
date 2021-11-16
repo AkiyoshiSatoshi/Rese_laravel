@@ -33,7 +33,7 @@
         <div class="item__right">
           <p>予約</p>
           <div class="reserve__item">
-            <form action="/reserve" method="POST">
+            <form action="/reserve" method="get">
               @csrf
               <ul class="reserve__form" >
                 <li class="form__item" >
