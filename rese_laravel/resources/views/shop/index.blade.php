@@ -1,18 +1,39 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
   </head>
   <body>
-    <header>
-      <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <x-jet-dropdown-link href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          this.closest('form').submit();">
-          {{ __('Log Out') }}
-        </x-jet-dropdown-link>
-      </form>
+    <header class="header">
+      <div class="header_left">
+        <h1>RESE</h1>
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+          <x-jet-dropdown-link href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            this.closest('form').submit();">
+            {{ __('Log Out') }}
+          </x-jet-dropdown-link>
+        </form>
+      </div>
+      <div class="header_right search_shop">
+        <select name="genre" id="">
+          <option value="">イタリアン</option>
+          <option value="">居酒屋</option>
+          <option value="">寿司</option>
+          <option value="">焼肉</option>
+          <option value="">ラーメン</option>
+        </select>
+        <select name="area" id="">
+          <option value="">東京都</option>
+          <option value="">大阪府</option>
+          <option value="">福岡県</option>
+        </select>
+        <div>
+          <input type="text" name="shop_name" id="">
+        </div>
+      </div>
       {{-- <p>こんにちは！ {{ Auth::user()->name }} です</p> --}}
     </header>
 
@@ -32,10 +53,13 @@
               <form action="/shop/{{$item->id}}" method="get">
                 <button type="submit" class="detail_btn">詳しく見る</button>
               </form>
-              <img method="get" action="/like" src="/img/Orion_love.svg" alt="img_heart" class="heart_img">
+              @if($likes[$loop->iteration]==1)
+                <a href="/unlike/{{$item->id}}"><i class="fas fa-heart heart_img"></i></a>
+              @else
+                <a href="/like/{{$item->id}}"><i class="far fa-heart heart_img"></i></a>
+              @endif
             </div>
           </div>
-          
         </div>
       @endforeach
       </div>
@@ -45,6 +69,19 @@
 
 <style>
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10%;
+}
+
+.header_left {
+
+}
+
+.header_right {
+  display: flex;
+}
 .shops {
   display: flex;
   flex-wrap: wrap;
@@ -88,8 +125,15 @@
   width: 100%;
 }
 
+.shop_detail a {
+  color: black;
+}
+
 .heart_img {
-  width: 10%;
+  font-size: 35px;
+}
+.fas {
+  color: pink;
 }
 
 .detail_btn {
