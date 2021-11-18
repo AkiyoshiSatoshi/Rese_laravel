@@ -21,7 +21,6 @@ class ReserveController extends Controller
                 "start_at" => $datetimes,
                 "num_of_users" => $request->number,
             ];
-            return $param;
             //予約保存機能
             $reservation->fill($param)->save();
         } catch (\Throwable $th) {
