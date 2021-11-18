@@ -9,9 +9,14 @@ class Shop extends Model
 {
     use HasFactory;
 
+    public function checked_like_by_auth_user()
+    {
+        
+    }
+
     public function likes()
     {
-        return $this->hasMany(Like::class,'user_id');
+        return $this->hasMany(Like::class);
     }
 
     public function areas()
