@@ -19,15 +19,15 @@
     <main>
       <a href="/shop"> <span><</span> お店一覧</a>
       <div class="shop_detail">
-        @foreach ($tests as $item)
+        @foreach ($shops as $shop)
         <div class="item__left">
-          <p>{{ $item->name }}</p>
-          <img src="{{ $item->img_url }}" alt="shop_img" class="shop_img">
+          <p>{{ $shop->name }}</p>
+          <img src="{{ $shop->img_url }}" alt="shop_img" class="shop_img">
           <div class="category_items">
-            <p class="category_txt">#{{ $item->areas->name }}</p>
-            <p class="category_txt">#{{ $item->genres->name }}</p>
+            <p class="category_txt">#{{ $shop->areas->name }}</p>
+            <p class="category_txt">#{{ $shop->genres->name }}</p>
           </div>
-          <p>{{ $item->description }}</p>
+          <p>{{ $shop->description }}</p>
         </div>
         @endforeach
         <div class="item__right">
@@ -39,9 +39,9 @@
                 <li class="form__item" >
                   <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" id="">
                 </li>
-                @foreach ($tests as $item)
+                @foreach ($shops as $shop)
                 <li class="form__item" >
-                    <input type="hidden" name="shop_id" value="{{ $item->id }}" id="">
+                    <input type="hidden" name="shop_id" value="{{ $shop->id }}" id="">
                 </li>
                 @endforeach
                 <li class="form__item" >
@@ -86,8 +86,8 @@
                 <table>
                   <tr>
                     <td>Shop</td>
-                    @foreach ($tests as $item)
-                      <th>{{ $item->name }}</th>
+                    @foreach ($shops as $shop)
+                      <th>{{ $shop->name }}</th>
                     @endforeach
                   </tr>
                   <tr>
