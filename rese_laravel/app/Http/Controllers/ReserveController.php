@@ -23,8 +23,16 @@ class ReserveController extends Controller
             ];
             //予約保存機能
             $reservation->fill($param)->save();
+            return redirect('/mypage');
         } catch (\Throwable $th) {
             echo "error";
         }
+    }
+
+    public function remove($id)
+    {
+        $reserve = Reservation::where('shop_id', $id)->where('user_id', Auth::id())->first();
+        $reserve->delete();
+        return redirect()->back();
     }
 }

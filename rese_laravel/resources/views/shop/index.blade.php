@@ -40,7 +40,7 @@
     <main>
       <h2>Shop List</h2>
       <div class="shops">
-      @foreach ($tests as $item)
+      @foreach ($shops as $item)
         <div class="shop_wrap">
           <img src="{{ $item->img_url }}" alt="shop_img" class="shop_img" >
           <div class="shop_item">
@@ -50,9 +50,7 @@
               <p class="category_txt">#{{ $item->genres->name }}</p>
             </div>
             <div class="shop_detail">
-              <form action="/shop/{{$item->id}}" method="get">
-                <button type="submit" class="detail_btn">詳しく見る</button>
-              </form>
+              <a type="submit" class="detail_btn" href="/shop/{{$item->id}}">詳しく見る</a>
               @if($likes[$loop->iteration]==1)
                 <a href="/unlike/{{$item->id}}"><i class="fas fa-heart heart_img"></i></a>
               @else
@@ -125,10 +123,6 @@
   width: 100%;
 }
 
-.shop_detail a {
-  color: black;
-}
-
 .heart_img {
   font-size: 35px;
 }
@@ -141,8 +135,7 @@
   border: none;
   border-radius: 10px;
   background-color: blue;
-  color: white;
-
+  color: azure;
 }
 
 </style>

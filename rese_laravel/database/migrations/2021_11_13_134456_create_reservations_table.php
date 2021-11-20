@@ -18,7 +18,7 @@ class CreateReservationsTable extends Migration
             $table->integer('user_id');
             $table->integer('shop_id');
             $table->integer('num_of_users');
-            $table->datetime('start_at');
+            $table->datetime('start_at')->unique();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

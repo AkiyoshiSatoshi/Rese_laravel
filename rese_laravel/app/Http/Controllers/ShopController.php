@@ -12,12 +12,11 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $tests = Shop::all();
+        $shops = Shop::all();
         $id = Auth::user()->id;
-        $search = Shop::doesnthave('likes')->get();
         $likes=array();
         $likes[0]='dummy';
-        foreach($tests as $shop)
+        foreach($shops as $shop)
         {
             $like=Like::where('user_id',$id)->where('shop_id',$shop['id'])->first();
             if(!empty($like)){
@@ -28,19 +27,14 @@ class ShopController extends Controller
             array_push($likes,$like);
         }
         if (Auth::check()) {
-            return view('shop.index', compact('tests', 'likes'));
+            return view('shop.index', compact('shops', 'likes'));
         } else {
             return view('auth/login');
         }
     }
     public function shopdetail($id)
     {
-        $tests = Shop::where('id', $id)->get();
-        return view('shop.detail',compact('tests'));
-    }
-
-    public function mypage(Request $request)
-    {
-        
+        $shops = Shop::where('id', $id)->get();
+        return view('shop.detail',compact('shops'));
     }
 }

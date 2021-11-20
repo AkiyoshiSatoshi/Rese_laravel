@@ -28,8 +28,11 @@ Route::get('/test', [GenreController::class, 'index']);
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('/shop/{shop_id}', [ShopController::class, 'shopdetail']);
 
+Route::get('/mypage', [AdminController::class, 'mypage']);
+
 //予約機能
 Route::get('/reserve', [ReserveController::class, 'store']);
+Route::get('/reserve/{id}', [ReserveController::class, 'remove']);
 
 //いいね機能
 Route::get('like/{shop_id}', [LikeController::class, 'like']);
