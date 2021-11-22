@@ -13,6 +13,10 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::all();
+        if (empty(Auth::id())) {
+            return view('shop.index',compact('shops'));
+        }
+
         $id = Auth::user()->id;
         $likes=array();
         $likes[0]='dummy';
@@ -31,6 +35,23 @@ class ShopController extends Controller
         } else {
             return view('auth/login');
         }
+    }
+    public function postshop()
+    {
+        $shop = new Shop;
+        $adminRepre = Auth::user()->access_auth;
+        if ( $adminRepre == 1 ) {
+            echo "authentication success";
+            dd($shop);
+        } else {
+            return "Not access";
+            // return view('/');
+        }
+    }
+
+    public function viewReps()
+    {
+        return view('admin.repre');
     }
     public function shopdetail($id)
     {
