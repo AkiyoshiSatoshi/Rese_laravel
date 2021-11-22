@@ -19,13 +19,10 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/test', [GenreController::class, 'index']);
 
-Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/', [ShopController::class, 'index']);
 Route::get('/shop/{shop_id}', [ShopController::class, 'shopdetail']);
 
 Route::get('/mypage', [AdminController::class, 'mypage']);
@@ -38,6 +35,8 @@ Route::get('/reserve/{id}', [ReserveController::class, 'remove']);
 Route::get('like/{shop_id}', [LikeController::class, 'like']);
 Route::get('unlike/{shop_id}', [LikeController::class, 'unlike']);
 
+//店舗代表者用機能
+Route::get('/repre', [ShopController::class, 'viewshop']);
 
 Route::get('/admin/test', [AdminController::class, 'adminedit']);
 

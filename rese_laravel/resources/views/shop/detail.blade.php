@@ -2,143 +2,288 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
   </head>
   <body>
     <header>
+      <h1>RESE</h1>
       <form method="POST" action="{{ route('logout') }}">
         @csrf
         <x-jet-dropdown-link href="{{ route('logout') }}"
           onclick="event.preventDefault();
           this.closest('form').submit();">
-          {{ __('Log Out') }}
+          <i class="fas fa-sign-out-alt icon "></i>
         </x-jet-dropdown-link>
       </form>
-      <p>こんにちは！ {{ Auth::user()->name }} です</p>
     </header>
 
     <main>
-      <a href="/shop"> <span><</span> お店一覧</a>
       <div class="shop_detail">
-        @foreach ($shops as $shop)
-        <div class="item__left">
-          <p>{{ $shop->name }}</p>
-          <img src="{{ $shop->img_url }}" alt="shop_img" class="shop_img">
-          <div class="category_items">
-            <p class="category_txt">#{{ $shop->areas->name }}</p>
-            <p class="category_txt">#{{ $shop->genres->name }}</p>
+        <div class="flex shop__card">
+          @foreach ($shops as $shop)
+          <div class="shop__header">
+            <a href="/shop" class="arrow"><</a>
+            <h3 class="shop__ttl">{{ $shop->name }}</h3>
           </div>
-          <p>{{ $shop->description }}</p>
-        </div>
-        @endforeach
-        <div class="item__right">
-          <p>予約</p>
-          <div class="reserve__item">
-            <form action="/reserve" method="get">
-              @csrf
-              <ul class="reserve__form" >
-                <li class="form__item" >
-                  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" id="">
-                </li>
-                @foreach ($shops as $shop)
-                <li class="form__item" >
-                    <input type="hidden" name="shop_id" value="{{ $shop->id }}" id="">
-                </li>
-                @endforeach
-                <li class="form__item" >
-                  <label for="">日付</label>
-                  <input type="date" name="date" id="">
-                </li>
-                <li class="form__item" >
-                  <label for="">時間</label>
-                  <select name="time" id="">
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="18:00">18:00</option>
-                    <option value="19:00">19:00</option>
-                    <option value="20:00">20:00</option>
-                    <option value="21:00">21:00</option>
-                    <option value="22:00">22:00</option>
-                    <option value="23:00">23:00</option>
-                  </select>
-                </li>
-                <li class="form__item" >
-                  <label for="">人数</label>
-                  <select name="number" id="">
-                    <option value="1">1人</option>
-                    <option value="2">2人</option>
-                    <option value="3">3人</option>
-                    <option value="4">4人</option>
-                    <option value="5">5人</option>
-                    <option value="6">6人</option>
-                    <option value="7">7人</option>
-                    <option value="8">8人</option>
-                    <option value="9">9人</option>
-                    <option value="10">10人</option>
-                  </select>
-                </li>
-              </ul>
-
-              <div class="reserve_check">
-                <table>
-                  <tr>
-                    <td>Shop</td>
-                    @foreach ($shops as $shop)
-                      <th>{{ $shop->name }}</th>
-                    @endforeach
-                  </tr>
-                  <tr>
-                    <td>Date</td>
-                    <td id="date"></td>
-                  </tr>
-                  <tr>
-                    <td>Time</td>
-                    <td id="time"></td>
-                  </tr>
-                  <tr>
-                    <td>Number</td>
-                    <td id="number"><span>人</span></td>
-                  </tr>
-                </table>
+          <div class="shop__box">
+            <div class="item__left">
+              <img src="{{ $shop->img_url }}" alt="shop_img" class="shop_img">
+              <div class="category_items">
+                <p class="category_txt">#{{ $shop->areas->name }}</p>
+                <p class="category_txt">#{{ $shop->genres->name }}</p>
               </div>
-              <input type="submit" value="送信">
-            </form>
+              <p class="shop__pickup">{{ $shop->description }}</p>
+            </div>
           </div>
+          @endforeach
         </div>
+        @if (empty(Auth::user()))
+          <div class=" auth__card flex">
+            <h3 class="reserve__ttl msg">ログインまたは、新規登録をすると予約できます。</h3>
+            <div class="auth__card" >
+              <a href="/login">Login</a>
+              <a href="/register">Register</a>
+            </div>
+          </div>
+        @else
+          <form action="/reserve" method="get" class="reserve__form flex" >
+            <div class="reserve__card">
+              <h3 class="reserve__ttl">予約</h3>
+              <div class="reserve__item">
+                @csrf
+                <ul class="form__card">
+                  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" id="">
+                  @foreach ($shops as $shop)
+                  <input type="hidden" name="shop_id" value="{{ $shop->id }}" id="">
+                  @endforeach
+                  <li class="form__item" >
+                    <input type="date" class="reserve__input" name="date" id="DateInput">
+                  </li>
+                  <li class="form__item" >
+                    <select name="time" class="reserve__select" id="TimeInput">
+                      <option value='' disabled selected style='display:none;'>Time</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                      <option value="22:00">22:00</option>
+                      <option value="23:00">23:00</option>
+                    </select>
+                  </li>
+                  <li class="form__item" >
+                    <select name="number" class="reserve__select" id="NumInput" >
+                      <option value='' disabled selected style='display:none;'>Number</option>
+                      <option value="1">1人</option>
+                      <option value="2">2人</option>
+                      <option value="3">3人</option>
+                      <option value="4">4人</option>
+                      <option value="5">5人</option>
+                      <option value="6">6人</option>
+                      <option value="7">7人</option>
+                      <option value="8">8人</option>
+                      <option value="9">9人</option>
+                      <option value="10">10人</option>
+                    </select>
+                  </li>
+                </ul>
+                <div class="reserve__check">
+                  <table class="reserve__table">
+                    <tr>
+                      <td class="reserve__name">Shop</td>
+                      @foreach ($shops as $shop)
+                        <td class="reserving__form">{{ $shop->name }}</td>
+                      @endforeach
+                    </tr>
+                    <tr>
+                      <td class="reserve__name">Date</td>
+                      <td id="Date" class="reserving__form">日付を入力してください</td>
+                    </tr>
+                    <tr>
+                      <td class="reserve__name">Time</td>
+                      <td id="Time" class="reserving__form">時間を入力してください</td>
+                    </tr>
+                    <tr>
+                      <td class="reserve__name">Number</td>
+                      <td id="Number" class="reserving__form num__form">人数を入力してください。</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <input type="submit" class="reserve__btn" value="送信">
+            </div>
+          </form>
+        @endif
       </div>
     </main>
   </body>
 </html>
 
 <script>
-  const Date = document.getElementById('date');
+  const dateInput = document.getElementById('DateInput');
+  const timeInput = document.getElementById('TimeInput');
+  const numInput = document.getElementById('NumInput');
+  
+  const Date = document.getElementById('Date');
   const Time = document.getElementById('Time');
-  const Number = document.getElementById('Number');
-  console.log(Date);
+  const number = document.getElementById('Number');
+
+  dateInput.addEventListener('change', function () {
+    Date.textContent = dateInput.value;
+  });
+  timeInput.addEventListener('change', function () {
+    Time.textContent = timeInput.value;
+  });
+  numInput.addEventListener('change', function () {
+    number.textContent = numInput.value + "人";
+  });
 </script>
 
 <style>
 
+
+.icon {
+  color: #55BBBB;
+  font-size: 35px;
+  text-decoration: none;
+}
+
+
+.arrow {
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 25px;
+  vertical-align: top;
+  padding: 1px 15px 10px 10px;
+  background: #ffffff;
+  box-shadow:  7px 7px 14px #5a5a5a, -7px -7px 14px #ffffff;
+}
+
+.flex {
+  width: 45%;
+  justify-content: space-around;
+}
+
 .shop_detail {
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
+.shop__header {
+  display: flex;
+}
+.shop__ttl {
+  margin-left: 20px;
+  font-size: 30px;
+  padding-top: 5px;
+  vertical-align: middle;
+}
 
-.item__left {
-  width: 40%;
+.category_items {
+  padding: 20px 0;
+  display: flex;
+}
+
+.shop__pickup {
+  line-height: 30px;
 }
 
 .shop_img {
   width: 100%;
 }
 
+.shop__box {
+  margin-top: 20px;
+}
+
+.reserve__card {
+  background-color: #55BBBB;
+  margin: 50px auto;
+  border-radius: 10px; 
+  
+}
+
+.reserve__ttl {
+  text-align: left;
+  color: #ffffff;
+  padding: 20px 50px;
+}
+
+
+.auth__card {
+  background-color: #55BBBB;
+  height: 50vh;
+  text-align: center;
+}
+
+.auth__card a {
+  color: #ffffff;
+}
+
+.reserve__item {
+  width: 100%;
+}
+
+.form__card {
+  margin: 0 auto;
+}
+
 .form__item {
   list-style: none;
+  margin: 10px 0;
+  padding-left: 30px;
+}
+
+.reserve__table {
+  width: 70%;
+  margin: 0 auto;
+  background-color: #24C5C5;
+  padding: 50px 30px;
+  border-radius: 20px;
+}
+
+.reserve__input {
+  border: none;
+  width: 50%;
+  padding: 5px 0;
+}
+
+.reserve__select {
+  border: none;
+  width: 80%;
+  padding: 5px 0;
+}
+
+.reserve__name {
+  width: 20%;
+  text-align: right;
+  color: #ffffff;
+}
+
+.reserving__form { 
+  width: 50%;
+  text-align: center;
+  color: #ffffff;
+}
+
+
+.reserve__btn {
+  width: 100%;
+  border: none;
+  background-color: #078787;
+  border-radius: 0 0 10px 10px;
+  color: #ffffff;
+  margin-top: 200px; 
+  padding:10px 0; 
 }
 
 </style>
