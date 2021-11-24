@@ -36,7 +36,13 @@ Route::get('like/{shop_id}', [LikeController::class, 'like']);
 Route::get('unlike/{shop_id}', [LikeController::class, 'unlike']);
 
 //店舗代表者用機能
-Route::get('/repre', [ShopController::class, 'viewshop']);
+Route::get('/repre', [ShopController::class, 'viewReps']);
+
+Route::post('/repre', [ShopController::class, 'postshop']);
+Route::post('/repre/{owner_id}', [ShopController::class, 'updateshop']);
+
+//管理者用機能
+Route::get('/admin', [AdminController::class, 'adminindex']);
 
 Route::get('/admin/test', [AdminController::class, 'adminedit']);
 
