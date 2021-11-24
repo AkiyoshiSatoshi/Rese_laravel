@@ -36,14 +36,12 @@ class AdminController extends Controller
             $like=Like::where('user_id',Auth::user()->id)->where('shop_id',$shop['id'])->first();
             array_push($likes,$like);
         }
-
-        // dd($likes);
-
         $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-        // foreach ($reservations as $reservation) {
-        //     $date = date('Y/m/d', strtotime($reservation->start_at));
-        //     $time = date('H:i:s', strtotime($reservation->start_at));
-        // }
         return view('mypage', compact('likes', 'reservations',));
+    }
+
+    public function adminindex()
+    {
+        return view('admin.index');
     }
 }
