@@ -20,6 +20,7 @@ class CreateShopsTable extends Migration
             $table->foreignId('genre_id')->constrained('genres');
             $table->string('description');
             $table->string('img_url');
+            $table->string('owner_id')->unique()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
