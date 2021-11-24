@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Shop extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 'img_url','description','area_id','genre_id','owner_id'
+    ];
 
     public function checked_like_by_auth_user()
     {
