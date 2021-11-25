@@ -19,7 +19,19 @@ class UserTableSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin1234'),
+            'access_auth' => 9,
+        ]);
+        User::create([
+            'name' => 'Representative',
+            'email' => 'repre@repre.com',
+            'password' => Hash::make('repre1234'),
             'access_auth' => 1,
+        ]);
+        User::create([
+            'name' => 'User',
+            'email' => 'user@user.com',
+            'password' => Hash::make('user1234'),
+            'access_auth' => 0,
         ]);
     }
 }
