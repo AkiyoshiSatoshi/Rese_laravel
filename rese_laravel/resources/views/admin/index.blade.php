@@ -12,7 +12,15 @@
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
-        <h2>店舗代表者用新規登録ページ</h2>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-jet-dropdown-link href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                this.closest('form').submit();">
+                {{ __('Log Out') }}
+            </x-jet-dropdown-link>
+        </form>
+        <h2>店舗代表者新規登録ページ</h2>
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
