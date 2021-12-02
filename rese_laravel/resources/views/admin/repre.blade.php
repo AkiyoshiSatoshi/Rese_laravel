@@ -30,8 +30,8 @@
         </div>
         <input type="radio" class="radiobox" name="tab__3" id="Tab_03">
         <label class="tab__label" for="">予約情報確認ページ</label>
-        <div class="content booke__confirm">
-          
+        <div class="content book__confirm">
+          <a href="/mail/form/4">メール送信</a>
         </div>
       </section>
     </div>
@@ -46,9 +46,9 @@
       <!--タブを切り替えて表示するコンテンツ-->
       <div class="panel-group">
         <div class="panel tab-A is-show">
-          @if ( empty($test) )
+          @if ( empty($owner) )
             <h2>店舗作成</h2>
-            <form method="POST" action="/repre" enctype='multipart/form-data' >
+            <form method="POST" action="/store" enctype='multipart/form-data' >
               @csrf
               <label for="">店名</label>
               <input type="text" name="shop_name" >
@@ -77,14 +77,14 @@
           @endif
         </div>
         <div class="panel tab-B">
-          @if ( empty($test) )
+          @if ( empty($owner) )
             <h2>店舗の登録がされていません。<br/>店舗登録をしてください。</h2>
           @else
             <h2>店舗更新</h2>
-            <form action="/repre/{{$test->owner_id}}" method="post">
+            <form action="/repre/{{$owner->owner_id}}" method="post">
               @csrf
-              <input type="text" value="{{ $test->name }}" name="name" >
-              <input type="file" name="img_url" name="img_url" value="{{ $test->img_url }}" >
+              <input type="text" value="{{ $owner->name }}" name="name" >
+              <input type="file" name="img_url" name="img_url" value="{{ $owner->img_url }}" >
               <label for="">ジャンル</label>
                 <select name="genre" id="">
                   <option value="1">居酒屋</option>
@@ -99,13 +99,13 @@
                   <option value="2">大阪府</option>
                   <option value="3">福岡県</option>
                 </select>
-              <input type="description" value="{{ $test->description }}" name="description" >
+              <input type="description" value="{{ $owner->description }}" name="description" >
               <button type="submit">更新</button>
             </form>
           @endif
         </div>
         <div class="panel tab-C">
-          @if (empty($test))
+          @if (empty($owner))
             <h2>店舗登録をしてください</h2>
           @else
             @foreach ($reservation as $item)
@@ -113,6 +113,7 @@
               <p>{{ $item->users->name }}</p>
               <p>{{$item->num_of_users }}</p>
               <p>{{$item->start_at }}</p>
+              <a href="/mail/form/{{ $user->id }}">メール送信</a>
             @endforeach
           @endif
         </div>

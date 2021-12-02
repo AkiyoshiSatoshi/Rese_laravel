@@ -23,7 +23,7 @@
         <div class="flex shop__card">
           @foreach ($shops as $shop)
           <div class="shop__header">
-            <a href="/shop" class="arrow"><</a>
+            <a href="/" class="arrow"><</a>
             <h3 class="shop__ttl">{{ $shop->name }}</h3>
           </div>
           <div class="shop__box">
