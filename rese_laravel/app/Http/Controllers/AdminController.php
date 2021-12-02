@@ -13,35 +13,31 @@ use App\Models\Test;
 
 class AdminController extends Controller
 {
-    public function Adminshow()
-    {
-        return view('show');
-    }
-    public function adminedit()
-    {
-        $test = Auth::user()->access_auth;
-        if ($test == 9) {
-            return view('auth.login');
-        } else {
-            return view('shop');
-        }
-    }
-
-    public function mypage()
-    {
-        $shops = Shop::all();
-        $likes=[];
-        foreach($shops as $shop)
-        {
-            $like=Like::where('user_id',Auth::user()->id)->where('shop_id',$shop['id'])->first();
-            array_push($likes,$like);
-        }
-        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-        return view('mypage', compact('likes', 'reservations',));
-    }
-
     public function adminindex()
     {
         return view('admin.index');
+    }
+
+    public function createShop(Request $request)
+    {
+        $image_path = $request->file('img_url')->store('public/test');
+        $item = Auth::id();
+        $shop = new Shop;
+        $param = [
+            "name" => $request->shop_name,
+            "img_url" => $image_path,
+            "description" => $request->description,
+            "area_id" => $request->area,
+            "genre_id" => $request->genre,
+            "owner_id" => Auth::id()
+        ];
+        $shop->fill($param)->save();
+        $adminRepre = Auth::user()->access_auth;
+        if ( $adminRepre == 1 ) {
+            echo "authentication success";
+            return view('admin.repre');
+        } else {
+            return "Not access";
+        }
     }
 }
