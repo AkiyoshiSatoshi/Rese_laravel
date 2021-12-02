@@ -23,7 +23,7 @@
         <div class="flex shop__card">
           @foreach ($shops as $shop)
           <div class="shop__header">
-            <a href="/shop" class="arrow"><</a>
+            <a href="/" class="arrow"><</a>
             <h3 class="shop__ttl">{{ $shop->name }}</h3>
           </div>
           <div class="shop__box">
@@ -62,7 +62,7 @@
                   </li>
                   <li class="form__item" >
                     <select name="time" class="reserve__select" id="TimeInput">
-                      <option value='' disabled selected style='display:none;'>Time</option>
+                      <option value='' disabled selected class="time">Time</option>
                       <option value="10:00">10:00</option>
                       <option value="11:00">11:00</option>
                       <option value="12:00">12:00</option>
@@ -79,7 +79,7 @@
                   </li>
                   <li class="form__item" >
                     <select name="number" class="reserve__select" id="NumInput" >
-                      <option value='' disabled selected style='display:none;'>Number</option>
+                      <option value='' disabled selected class="number">Number</option>
                       <option value="1">1人</option>
                       <option value="2">2人</option>
                       <option value="3">3人</option>
@@ -284,6 +284,14 @@
   color: #ffffff;
   margin-top: 200px; 
   padding:10px 0; 
+}
+
+.time {
+  display:none;
+}
+
+.number {
+  display:none;
 }
 
 </style>

@@ -29,13 +29,13 @@ class CreateNewUser implements CreatesNewUsers
         // 入力された値をコード値に変換する処理を追加
         switch ($input['access_auth']) {
             case "ユーザー":
-                $auth_code = "0";
+                $auth_code = 0;
                 break;
             case "店舗代表者":
-                $auth_code = "1";
+                $auth_code = 1;
                 break;
             case "アプリ管理者":
-                $auth_code = "9";
+                $auth_code = 9;
                 break;
         }
         return User::create([
