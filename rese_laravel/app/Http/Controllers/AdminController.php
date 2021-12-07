@@ -40,4 +40,13 @@ class AdminController extends Controller
             return "Not access";
         }
     }
+
+    public function updateshop(Request $request)
+    {
+        $shop = Shop::where('owner_id', $request->owner_id)->first();
+        $form = $request->all();
+        unset($form['_token']);
+        $shop->fill($form)->save();
+        dd($shop);
+    }
 }
