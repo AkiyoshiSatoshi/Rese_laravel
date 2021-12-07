@@ -66,5 +66,4 @@ class ShopController extends Controller
         $shops = Shop::where('id', $id)->get();
         return view('shop.detail',compact('shops'));
     }
-    
 }
