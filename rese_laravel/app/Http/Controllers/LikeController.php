@@ -9,10 +9,6 @@ use App\Models\Like;
 
 class LikeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified'])->only(['like', 'unlike']);
-    }
     public function like(Request $request, $id)
     {
         $like = new Like;

@@ -11,12 +11,12 @@
           @if (empty(Auth::id()))
               <ul>
                 <li><a class="menu__item" href="/">HOME</a></li>
-                <li><a class="menu__item" href="/register">Register</a></li>
+                <li><a class="menu__item" href="/preregister">Register</a></li>
                 <li><a class="menu__item" href="/login">Login</a></li>
               </ul>
           @else
               <ul>
-                <li><a class="menu__item" href="/">HOME</a></li>
+                <li><a class="menu__item" href="/shop">HOME</a></li>
                 <li>
                   <form method="POST" action="{{ route('logout') }}">
                     @csrf
