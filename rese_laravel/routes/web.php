@@ -8,6 +8,7 @@ use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,15 @@ use App\Http\Controllers\MailController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/', function(){
+//     return view('test.pre');
+// });
+
+Route::get('/preregister', [RegisterController::class, 'userStore']);
+Route::post('/premail', [RegisterController::class, 'preStore']);
+Route::get('/register/verify/{token}', [RegisterController::class, 'view']);
+Route::post('/register/store', [RegisterController::class, 'create']);
 
 Route::get('/mail/form/{id}', [MailController::class, 'index']);
 Route::post('/mail/send', [MailController::class, 'send']);

@@ -14,7 +14,7 @@ class AddColumnsUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('access_auth', 1)->after('current_team_id');
+            $table->string('access_auth', 1)->after('current_team_id')->nullable();
         });
     }
 
