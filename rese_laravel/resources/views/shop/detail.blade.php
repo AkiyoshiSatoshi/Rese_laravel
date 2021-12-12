@@ -28,7 +28,7 @@
           </div>
           <div class="shop__box">
             <div class="item__left">
-              <img src="{{ $shop->img_url }}" alt="shop_img" class="shop_img">
+              <img src="http://127.0.0.1:8000/storage/img/shop/{{ $shop->img_url }}" alt="shop_img" class="shop_img">
               <div class="category_items">
                 <p class="category_txt">#{{ $shop->areas->name }}</p>
                 <p class="category_txt">#{{ $shop->genres->name }}</p>

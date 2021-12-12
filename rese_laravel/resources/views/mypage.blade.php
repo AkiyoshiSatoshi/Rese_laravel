@@ -98,7 +98,7 @@
           @foreach ($likes as $like)
             @if(!empty($like))
               <div class="shop__wrap">
-                <img src="{{ $like->shop->img_url }}" alt="shop_img" class="shop__img" >
+                <img src="http://127.0.0.1:8000/storage/img/shop/{{ $like->shop->img_url }}" alt="shop_img" class="shop__img" >
                 <div class="shop__item">
                   <h3 class="shop_name">{{ $like->shop->name }}</h3>
                   <div class="category_items">

@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\Like;
 use App\Models\Shop;
 use App\Models\Test;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -20,12 +21,13 @@ class AdminController extends Controller
 
     public function createShop(Request $request)
     {
-        $image_path = $request->file('img_url')->store('public/test');
+        $url = $request->file('img_url')->getClientOriginalName();
+        Storage::disk('public')->putFileAs('img/shop',$request->img_url, $url);
         $item = Auth::id();
         $shop = new Shop;
         $param = [
             "name" => $request->shop_name,
-            "img_url" => $image_path,
+            "img_url" => $url,
             "description" => $request->description,
             "area_id" => $request->area,
             "genre_id" => $request->genre,
