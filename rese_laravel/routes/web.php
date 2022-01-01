@@ -3,12 +3,20 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ReserveController;
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\RegisterController;
+
+use App\Http\Controllers\User\UserAuthController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\ReserveController;
+use App\Http\Controllers\User\LikeController;
+
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\MailController;
+
+use App\Http\Controllers\System\SystemAuthController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,39 +29,83 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-// Route::get('/', function(){
-//     return view('test.pre');
-// });
 
-Route::get('/preregister', [RegisterController::class, 'userStore']);
-Route::post('/premail', [RegisterController::class, 'preStore']);
-Route::get('/register/verify/{token}', [RegisterController::class, 'view']);
-Route::post('/register/store', [RegisterController::class, 'create']);
+//test画面 初期画面
+Route::get('/test', function() {
+    return view('test');
+})->name('test');
 
-Route::get('/mail/form/{id}', [MailController::class, 'index']);
-Route::post('/mail/send', [MailController::class, 'send']);
+Route::get('/',[ShopController::class, 'view'])->name('view');
 
-Route::get('/', [ShopController::class, 'index']);
+Route::get('/preregister', [RegisterController::class, 'userStore'])->name('eeee');
+
+//２段階認証機能
+Route::group(['middleware' => ''], function ()
+{
+    //２段階認証機能
+    Route::post('/premail', [RegisterController::class, 'preStore']);
+    Route::get('/register/verify/{token}', [RegisterController::class, 'view']);
+    Route::post('/register/store', [RegisterController::class, 'create']);
+});
+
+//店舗情報取得機能
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop/{shop_id}', [ShopController::class, 'shopdetail']);
 
-Route::get('/mypage', [UserController::class, 'mypage']);
+//ユーザー機能
+Route::group(['namespace' => 'user','prefix' => 'user'], function() {
+    Route::get('/login', [UserAuthController::class, 'viewLogin'])->middleware('checked')->name('userLogin');
 
-//予約機能
-Route::get('/reserve', [ReserveController::class, 'store']);
-Route::get('/reserve/{id}', [ReserveController::class, 'remove']);
+    Route::middleware('user')->group(function() {
+        //ユーザー認証機能
+        Route::post('/login', [UserAuthController::class, 'userLogin'])->name('postLogin');
+    });
 
-//いいね機能
-Route::get('like/{shop_id}', [LikeController::class, 'like']);
-Route::get('unlike/{shop_id}', [LikeController::class, 'unlike']);
+    //マイページ表示機能
+    Route::get('/mypage', [UserController::class, 'mypage']);
 
-//店舗代表者用機能
-Route::post('/repre', [ShopController::class, 'postshop']);
-Route::post('/repre/{owner_id}', [ShopController::class, 'updateshop']);
+    //予約機能
+    Route::get('/reserve', [ReserveController::class, 'store']);
+    Route::get('/reserve/{id}', [ReserveController::class, 'remove']);
 
-//管理者用機能
-Route::get('/admin', [AdminController::class, 'adminindex']);
-//店舗追加
-Route::post('/store', [AdminController::class, 'createShop']);
+    //いいね取得/削除機能
+    Route::get('like/{shop_id}', [LikeController::class, 'like']);
+    Route::get('unlike/{shop_id}', [LikeController::class, 'unlike']);
+});
+
+
+//店舗代表者機能
+Route::group(['namespace' => 'admin', 'prefix' => 'admin'],function(){
+    //店舗代表者ログイン画面
+    Route::get('/login', [AdminAuthController::class, 'viewLogin'])->middleware('checked');
+    // Route::middleware('system')->group(function() {
+    //Admin認証機能
+        Route::post('/login', [AdminAuthController::class, 'adminLogin']);
+    // });
+        //自店舗作成機能
+    Route::post('/store',[AdminController::class, 'createShop']);
+    //自店舗情報更新機能
+    Route::post('/shop/{id}',[AdminController::class, 'updateShop']);
+    //メール送信機能
+    Route::post('/mail/send', [MailController::class, 'send']);
+    Route::get('/mail/form/{id}', [MailController::class, 'index']);
+});
+
+
+
+//管理者機能
+Route::group(['namespace' => 'System', 'prefix' => 'system'], function(){
+    Route::get('/login', [SystemAuthController::class, 'viewLogin'])->middleware('checked')->name('system.Login');
+    Route::middleware(['system'])->group(function() {
+        //管理者認証機能
+    Route::post('/login', [SystemAuthController::class, 'postLogin']);
+    });
+
+    //店舗代表者作成機能
+    Route::post('/repre/register', [AuthenticationController::class, 'repreStore']);
+
+});
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
