@@ -12,11 +12,6 @@ class Shop extends Model
         'name', 'img_url','description','area_id','genre_id','owner_id'
     ];
 
-    public function checked_like_by_auth_user()
-    {
-        
-    }
-
     public function likes()
     {
         return $this->hasMany(Like::class);

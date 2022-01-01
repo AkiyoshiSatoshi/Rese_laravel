@@ -12,6 +12,10 @@ use App\Models\Reservation;
 
 class ShopController extends Controller
 {
+    public function view()
+    {
+        return view('index');
+    }
     public function index()
     {
         $shops = Shop::all();
@@ -20,7 +24,6 @@ class ShopController extends Controller
             $admin = Auth::user()->access_auth;
             $id = Auth::user()->id;
             if ($admin == 0 ) {
-                // $id = Auth::user()->id;
                 $likes=array();
                 $likes[0]='dummy';
                 foreach($shops as $shop)
@@ -39,26 +42,18 @@ class ShopController extends Controller
                 $owner = Shop::where('owner_id', $id)->first();
                 if ($owner) {
                     $reservation = Reservation::where('shop_id', $owner->id)->get();
-                    return view('admin.repre',compact('owner', 'reservation','user'));
+                    return view('admin.index',compact('owner', 'reservation','user'));
                 } else {
-                    return view('admin.repre',compact('user'));
+                    return view('admin.index',compact('user'));
                 }
             } else {
-                return view('admin.index');
+                return view('system.repre_register');
             }
         } catch (\Throwable $th) {
+            // echo $th;
             echo "Not User registration";
             return view('shop.index',compact('shops'));
         }
-    }
-
-    public function updateshop(Request $request)
-    {
-        $shop = Shop::where('owner_id', $request->owner_id)->first();
-        $form = $request->all();
-        unset($form['_token']);
-        $shop->fill($form)->save();
-        dd($shop);
     }
 
     public function shopdetail($id)

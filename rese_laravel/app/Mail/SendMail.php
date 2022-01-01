@@ -33,7 +33,7 @@ class SendMail extends Mailable
         return $this
             ->from('hoge@hoge.com') // 送信元
             ->subject('テスト送信') // メールタイトル
-            ->view('mails.test') // どのテンプレートを呼び出すか
+            ->view('mail.contact') // どのテンプレートを呼び出すか
             ->with([
                 'mail' => $this->content
             ]);
