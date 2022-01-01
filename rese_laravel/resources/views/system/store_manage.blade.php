@@ -6,6 +6,7 @@
 </head>
 <body>
   <header>
+    <a href="/logout">Logout</a>
     <form method="POST" action="{{ route('logout') }}">
       @csrf
       <x-jet-dropdown-link href="{{ route('logout') }}"

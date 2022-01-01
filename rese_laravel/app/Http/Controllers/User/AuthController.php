@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\UserRequest;
-use Carbon\Carbon;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerification;
 
-class RegisterController extends Controller
+class AuthController extends Controller
 {
-    public function userStore()
+    //Pre-Register
+    public function viewStore()
     {
         return view('user.pre_register');
     }
 
+    //仮登録
     public function preStore(Request $request)
     {
         $auth_code = 0;
@@ -37,18 +37,24 @@ class RegisterController extends Controller
             return view('user.pre_register');
         }
     }
-
-    public function view($token)
+    
+    //Login
+    public function userLogin(Request $request)
     {
-        $user = User::where('email_verify_token', $token)->first();
-        return view('user.main_register', compact('user'));
+        $user = User::where('email', $request->email)->first();
+
+        // if () {
+        //     # code...
+        // }
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect('/');
+        }
+        return redirect('/login');
     }
-
-    public function create(Request $request)
+    //toLogin
+    public function viewLogin()
     {
-        $user = User::where('email_verify_token', $request->email_token)->first();
-        $user->name = $request->name;
-        $user->save();
-        return view('user.main_registered');
+        return view('user.login');
     }
 }

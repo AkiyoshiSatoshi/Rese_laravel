@@ -47,7 +47,7 @@
             </div>
           </div>
         @else
-          <form action="/reserve" method="get" class="reserve__form flex" >
+          <form action="/user/reserve" method="get" class="reserve__form flex" >
             <div class="reserve__card">
               <h3 class="reserve__ttl">予約</h3>
               <div class="reserve__item">

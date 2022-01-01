@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
@@ -23,7 +23,7 @@ class ReserveController extends Controller
             ];
             //予約保存機能
             $reservation->fill($param)->save();
-            return redirect('/mypage');
+            return redirect('/user/mypage');
         } catch (\Throwable $th) {
             echo "error";
         }

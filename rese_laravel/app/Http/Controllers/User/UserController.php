@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 use App\Models\Shop;
@@ -20,6 +21,6 @@ class UserController extends Controller
             array_push($likes,$like);
         }
         $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-        return view('mypage', compact('likes', 'reservations',));
+        return view('user.mypage', compact('likes', 'reservations'));
     }
 }

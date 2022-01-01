@@ -12,11 +12,10 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="/user/login">
             @csrf
-
             <div>
-                <label for="email" value="{{ __('Email') }}">Email</label>
+                <label for="email">Email</label>
                 <input id="email"  type="email" name="email" :value="old('email')" required autofocus />
             </div>
 

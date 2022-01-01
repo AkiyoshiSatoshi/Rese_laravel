@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 use App\Models\Like;
@@ -14,11 +15,6 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    public function adminindex()
-    {
-        return view('admin.index');
-    }
-
     public function createShop(Request $request)
     {
         $url = $request->file('img_url')->getClientOriginalName();
@@ -34,21 +30,21 @@ class AdminController extends Controller
             "owner_id" => Auth::id()
         ];
         $shop->fill($param)->save();
-        $adminRepre = Auth::user()->access_auth;
-        if ( $adminRepre == 1 ) {
+        $admincode = Auth::user()->access_auth;
+        if ( $admincode == 1 ) {
             echo "authentication success";
-            return view('admin.repre');
+            return redirect('/shop');
         } else {
             return "Not access";
         }
     }
 
-    public function updateshop(Request $request)
+    public function updateShop(Request $request,$id)
     {
-        $shop = Shop::where('owner_id', $request->owner_id)->first();
+        $shop = Shop::where('owner_id', $id)->first();
         $form = $request->all();
         unset($form['_token']);
-        $shop->fill($form)->save();
-        dd($shop);
+        $shop->update($form);
+        return redirect('/shop');
     }
 }
