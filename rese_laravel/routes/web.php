@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MailController;
 
 use App\Http\Controllers\System\SystemAuthController;
+use App\Http\Controllers\System\SystemController;
 
 
 
@@ -65,8 +66,14 @@ Route::group(['namespace' => 'user','prefix' => 'user'], function() {
     Route::get('/mypage', [UserController::class, 'mypage']);
 
     //予約機能
-    Route::get('/reserve', [ReserveController::class, 'store']);
+    Route::post('/reserve', [ReserveController::class, 'store']);
+
+    //予約削除機能
     Route::get('/reserve/{id}', [ReserveController::class, 'remove']);
+
+    //予約変更機能
+    Route::get('/reserve/change/{id}', [ReserveController::class, 'update']);
+    Route::post('/reserve/test', [ReserveController::class, 'change']);
 
     //いいね取得/削除機能
     Route::get('like/{shop_id}', [LikeController::class, 'like']);
@@ -102,7 +109,7 @@ Route::group(['namespace' => 'System', 'prefix' => 'system'], function(){
     });
 
     //店舗代表者作成機能
-    Route::post('/repre/register', [AuthenticationController::class, 'repreStore']);
+    Route::post('/post', [SystemController::class, 'adminStore']);
 
 });
 
