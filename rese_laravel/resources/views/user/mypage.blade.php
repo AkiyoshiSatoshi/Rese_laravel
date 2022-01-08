@@ -1,124 +1,81 @@
+@extends('layouts.app')
 
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-</head>
-<body>
-  <header>
-    <div class="hamburger">
-        <nav class="nav" id="nav">
-          @if (empty(Auth::id()))
-              <ul>
-                <li><a class="menu__item" href="/">HOME</a></li>
-                <li><a class="menu__item" href="/register">Register</a></li>
-                <li><a class="menu__item" href="/login">Login</a></li>
-              </ul>
-          @else
-              <ul>
-                <li><a class="menu__item" href="/">HOME</a></li>
-                <li>
-                  <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <x-jet-dropdown-link href="{{ route('logout') }}"
-                      onclick="event.preventDefault();
-                      this.closest('form').submit();">
-                      {{ __('Log Out') }}
-                    </x-jet-dropdown-link>
-                  </form>
-                </li>
-                <li><a class="menu__item" href="/mypage">MyPage</a></li>
-              </ul>
-          @endif
-        </nav>
-      <div class="menu" id="menu">
-        <span class="menu__line--top"></span>
-        <span class="menu__line--middle"></span>
-        <span class="menu__line--bottom"></span>
-      </div>
-    </div>
-    <div class="header">
-      <h1 class="app__ttl">Rese</h1>
-    </div>
-  </header>
-
-  <main>
-    <p>mypage</p>
-    <div class="mypage" >
-      <div class="mypage__left">
-        <h2>現在の予約状況</h2>
-        <div class="reserve__wrap">
-          @foreach ($reservations as $index => $item)
-          <div class="reserve__card" >
-            <div class="reserve__item_head" >
-              <i class="far fa-clock reserve__icon theme"></i>
-              <p class="theme" >予約{{$index+1}}</p>
-              <a href="/reserve/{{$item->shop_id}}" class="delete__btn"><i class="far fa-times-circle reserve__icon theme"></i></a>
-            </div>
-            <div class="reserve__item">
-              <table class="reserve__table">
-                <tr>
-                  <td class="reserve__name" >店舗名</td>
-                  <td class="reserved__form" >{{ $item->shops->name }}</td>
-                </tr>
-                <tr>
-                  <td class="reserve__name" >日付</td>
-                  <td class="reserved__form" >
-                    <?php 
-                      $date = date('Y/m/d', strtotime($item->start_at));
-                      echo $date;
-                    ?>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="reserve__name" >時間</td>
-                  <td class="reserved__form" >
-                    <?php 
-                      $time = date('H:i', strtotime($item->start_at));
-                      echo $time;
-                    ?>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="reserve__name" >人数</td>
-                  <td class="reserved__form" >
-                    <input type="number" value="{{ $item->num_of_users }}"><span>人</span>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          @endforeach
+@section('main')
+<div class="mypage" >
+  <div class="mypage__left">
+    <h2>現在の予約状況</h2>
+    <div class="reserve__wrap">
+      @foreach ($reservations as $index => $item)
+      <div class="reserve__card" >
+        <div class="reserve__item_head" >
+          <i class="far fa-clock reserve__icon theme"></i>
+          <p class="theme" >予約{{$index+1}}</p>
+          <a href="/user/reserve/change/{{$item->id}}">予約情報変更</a>
+          <a href="/user/reserve/{{$item->shop_id}}" class="delete__btn"><i class="far fa-times-circle reserve__icon theme"></i></a>
+        </div>
+        <div class="reserve__item">
+          <img src="{{ asset('/storage/img/shop/' . $item->shops->img_url ) }}" alt="" width="150px">
+          <table class="reserve__table">
+            <tr>
+              <td class="reserve__name" >店舗名</td>
+              <td class="reserved__form" >{{ $item->shops->name }}</td>
+            </tr>
+            <tr>
+              <td class="reserve__name" >日付</td>
+              <td class="reserved__form" >
+                <?php 
+                  $date = date('Y/m/d', strtotime($item->start_at));
+                  echo $date;
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <td class="reserve__name" >時間</td>
+              <td class="reserved__form" >
+                <?php 
+                  $time = date('H:i', strtotime($item->start_at));
+                  echo $time;
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <td class="reserve__name" >人数</td>
+              <td class="reserved__form" >
+                {{ $item->num_of_users }}<span>人</span>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
-      <div class="mypage__right">
-        <h2>{{Auth::user()->name }}さんがいいねしたお店</h2>
-        <div class="like__wrap">
-          @foreach ($likes as $like)
-            @if(!empty($like))
-              <div class="shop__wrap">
-                <img src="http://127.0.0.1:8000/storage/img/shop/{{ $like->shop->img_url }}" alt="shop_img" class="shop__img" >
-                <div class="shop__item">
-                  <h3 class="shop_name">{{ $like->shop->name }}</h3>
-                  <div class="category_items">
-                    <p class="category_txt">#{{ $like->shop->areas->name }}</p>
-                    <p class="category_txt">#{{ $like->shop->genres->name }}</p>
-                  </div>
-                </div>
-                <div class="shop_detail">
-                    <a type="submit" class="detail_btn" href="/shop/{{$like->shop_id}}" >詳しく見る</a>
-                    <a href="/unlike/{{$like->shop_id}}"><i class="fas fa-heart heart_img"></i></a>
-                  </div>
+      @endforeach
+    </div>
+  </div>
+  <div class="mypage__right">
+    <h2>{{Auth::user()->name }}さんがいいねしたお店</h2>
+    <div class="like__wrap">
+      @foreach ($likes as $like)
+        @if(!empty($like))
+          <div class="shop__wrap">
+            <img src="{{ asset('/storage/img/shop/' . $like->shop->img_url ) }}" alt="shop_img" class="shop__img" >
+            <div class="shop__item">
+              <h3 class="shop_name">{{ $like->shop->name }}</h3>
+              <div class="category_items">
+                <p class="category_txt">#{{ $like->shop->areas->name }}</p>
+                <p class="category_txt">#{{ $like->shop->genres->name }}</p>
               </div>
-            @endif
-          @endforeach
-        </div>
-      </div>
+            </div>
+            <div class="shop_detail">
+                <a type="submit" class="detail_btn" href="/shop/{{$like->shop_id}}" >詳しく見る</a>
+                <a href="/user/unlike/{{$like->shop_id}}"><i class="fas fa-heart heart_img"></i></a>
+              </div>
+          </div>
+        @endif
+      @endforeach
     </div>
-  </main>
-</body>
-</html>
+  </div>
+</div>
+@endsection
+
 
 <script>
   const target = document.getElementById("menu");
@@ -132,7 +89,7 @@ target.addEventListener('click', () => {
 <style>
 
 /*header*/
-
+/* 
 header {
   display: flex;
   justify-content: space-between;
@@ -220,7 +177,7 @@ header {
   vertical-align: middle;
   color: #55bbbb;
   font-size: 35px;
-}
+} */
 
 
 /*header*/
@@ -267,6 +224,10 @@ input {
 
 .reserve__icon {
   font-size: 24px;
+}
+
+.reserve__item {
+  display: flex;
 }
 
 .reserve__item_head {
@@ -372,9 +333,24 @@ input {
 
 @media screen and (max-width:768px) {
   .mypage {
-    display: block;
+    display: inline;
+  }
+
+  .mypage__left {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .mypage__right {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .shop__wrap {
+    width: 80%;
   }
 }
+
 
 
 </style>

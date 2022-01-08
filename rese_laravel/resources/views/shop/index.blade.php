@@ -1,14 +1,12 @@
 
-@extends('layouts.common')
+@extends('layouts.app')
 
-    @include('layouts.header')
-
-    
+    @section('main')
     <main>
       <div class="shops">
       @foreach ($shops as $item)
         <div class="shop_wrap">
-          <img src="http://127.0.0.1:8000/storage/img/shop/{{ $item->img_url }}" alt="shop_img" class="shop_img" >
+          <img src="{{ asset('/storage/img/shop/' . $item->img_url ) }}" alt="shop_img" class="shop_img" >
           <div class="shop_item">
             <h2 class="shop_name">{{ $item->name }}</h2>
             <div class="category_items">
@@ -32,6 +30,8 @@
       @endforeach
       </div>
     </main>
+@endsection
+
 
 <style>
 
@@ -94,4 +94,25 @@
   color: azure;
 }
 
+@media screen and (max-width: 768px) {
+  .shops {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .shop_wrap {
+    width: 40%;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  .shops {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .shop_wrap {
+    width: 100%;
+  }
+
+}
 </style>

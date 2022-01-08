@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Rese</title>
-</head>
-<body>
-  <div>
-    <h1>管理者ログイン画面</h1>
-    <form action="/system/login" method="post">
+@extends('layouts.auth')
+
+@section('main')
+<div class="login__wrap">
+  <h1 class="login__ttl" >System Login</h1>
+  <div class="login__form" >
+    <form method="POST" action="/system/login">
       @csrf
-      <label for="email">Email</label>
-      <input type="email" name="email">
-      <label for="password">Password</label>
-      <input type="password" name="password">
-      <input type="submit" value="管理者ログイン">
+      <div class="login__input" >
+        <input class="input__form" id="email"  type="email" name="email" :value="old('email')" required autofocus placeholder="Email" />
+      </div>
+      <div class="login__input">
+        <input class="input__form" id="password"  type="password" name="password" required autocomplete="current-password" placeholder="Password" />
+      </div>
+      <div class="">
+        <button class="login__btn">Log in</button>
+      </div>
     </form>
   </div>
-</body>
-</html>
+</div>
+@endsection

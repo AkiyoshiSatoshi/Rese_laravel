@@ -16,22 +16,6 @@
     </form>
   </header>
   <main>
-    <div class="shop__wrap">
-      <section class="tab__switch">
-        <input type="radio" name="tab_1" id="Tab_01" class="radiobox" checked="checked">
-        <label class="tab__label" for="">店舗作成ページ</label>
-        <div class="content shop__create " >
-          
-        </div>
-        <input type="radio" class="radiobox" name="tab_2" id="Tab_02">
-        <label class="tab__label" for="">自店舗更新ページ</label>
-        <div class="content shop__update">
-          
-        </div>
-        <input type="radio" class="radiobox" name="tab__3" id="Tab_03">
-        <label class="tab__label" for="">予約情報確認ページ</label>
-      </section>
-    </div>
     <div class="tab-panel">
       <!--タブ-->
       <ul class="tab-group">
@@ -71,6 +55,27 @@
             </form>
           @else
             <h2>あなたの店舗は作成済みです。</h2>
+            <div class="owner__shop__wrap" >
+              <img src="{{ asset('/storage/img/shop/' . $owner->img_url) }}" alt="" width="400px" >
+              <table class="owner__shop__items">
+                <tr>
+                  <td>お店</td>
+                  <td class="owner__shop__item" >{{$owner->name}}</td>
+                </tr>
+                <tr>
+                  <td>エリア</td>
+                  <td class="owner__shop__item" >{{ $owner->areas->name }}</td>
+                </tr>
+                <tr>
+                  <td>ジャンル</td>
+                  <td class="owner__shop__item" >{{ $owner->genres->name }}</td>
+                </tr>
+                <tr>
+                  <td>店舗説明</td>
+                  <td class="owner__shop__item" >{{ $owner->description }}</td>
+                </tr>
+              </table>
+            </div>
           @endif
         </div>
         <div class="panel tab-B">
@@ -105,14 +110,24 @@
           @if (empty($owner))
             <h2>店舗登録をしてください</h2>
           @else
-            @foreach ($reservation as $item)
-              <p>{{ $item->shops->name }}</p>
-              <p>{{ $item->users->name }}</p>
-              <p>{{$item->num_of_users }}</p>
-              <p>{{$item->start_at }}</p>
-              <p>{{$user->id}}</p>
-              <a href="/admin/mail/form/{{ $user->id }}">メール送信</a>
-            @endforeach
+            <table>
+              <tbody>
+                <tr class="table__top" >
+                  <td>ユーザー名</td>
+                  <td>予約日時</td>
+                  <td>人数</td>
+                  <td>ユーザー連絡</td>
+                </tr>
+                @foreach ($reservation as $item)
+                <tr>
+                  <td>{{ $item->users->name }}</td>
+                  <td>{{$item->start_at }}</td>
+                  <td>{{$item->num_of_users }}</td>
+                  <td><a class="" href="/admin/mail/form/{{ $user->id }}">メール送信</a></td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
           @endif
         </div>
       </div>
@@ -125,6 +140,12 @@
 </html>
 
 <style>
+
+.owner__shop__wrap {
+  display: flex;
+}
+
+
 .tab-group{
   display: flex;
   justify-content: center;
@@ -133,27 +154,72 @@
   flex-grow: 1;
   padding:5px;
   list-style:none;
-  border:solid 1px #CCC;
+  border:solid 1px #ffffff;
   text-align:center;
   cursor:pointer;
 }
 .panel-group{
-  height:100px;
-  border:solid 1px #CCC;
+  border:solid 1px #ffffff;
   border-top:none;
-  background:#eee;
+  background:#55bbbb;
 }
 .panel{
   display:none;
 }
 .tab.is-active{
-  background:#F00;
+  background:#55bbbb;
   color:#FFF;
   transition: all 0.2s ease-out;
 }
 .panel.is-show{
   display:block;
 }
+
+.reserve__user__wrap {
+  background-color: #55bbbb;
+  margin: 10px auto;
+  display: flex;
+}
+
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  color: #FFF;
+}
+
+
+table tr{
+  border-bottom: solid 1px #ffffff;
+  cursor: pointer;
+}
+
+.table__top {
+  background-color: #0cadad;
+}
+
+/* table tr:hover{
+  background-color: #d4f0fd;
+} */
+
+table th,table td{
+  text-align: center;
+  width: 25%;
+  padding: 15px 0;
+}
+
+table td.icon{
+  background-size: 35px;
+  background-position: left 5px center;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+
+body {
+  background-color: #a1c2c2;
+  color: white;
+}
+
 
 </style>
 

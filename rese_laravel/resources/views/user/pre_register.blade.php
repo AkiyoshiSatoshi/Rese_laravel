@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('main')
 <h2>仮登録</h2>
 
 <form action="/premail" method="post">
@@ -10,3 +13,4 @@
   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
   <input type="submit" value="仮登録">
 </form>
+@endsection
