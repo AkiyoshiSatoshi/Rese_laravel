@@ -1,0 +1,10 @@
+.footer {
+  width: 100%;
+  background-color: #55bbbb;
+}
+
+.footer__ttl {
+  color: #ffffff;
+  font-size: 28px;
+  text-align: center;
+}

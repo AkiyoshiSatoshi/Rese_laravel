@@ -35,4 +35,23 @@ class ReserveController extends Controller
         $reserve->delete();
         return redirect()->back();
     }
+    public function update($id)
+    {
+        $reserve = Reservation::find($id);
+        return view('shop.reserve__change', compact('reserve'));
+    }
+
+    public function change(Request $request)
+    {
+        $reserve = Reservation::find($request->id);
+        $datetimes =$request->date . ":" . $request->time;
+        $param = [
+            "user_id" => $request->user_id,
+            "shop_id" => $request->shop_id,
+            "start_at" => $datetimes,
+            "num_of_users" => $request->number
+        ];
+        $reserve->update($param);
+        return redirect('/user/mypage');
+    }
 }

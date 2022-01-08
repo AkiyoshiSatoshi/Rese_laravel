@@ -1,0 +1,88 @@
+  body {
+    background-color: #55bbbb;
+  }
+  .login__wrap {
+    width: 50%;
+    margin: 100px auto;
+    background-color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .login__ttl {
+    padding-top: 10px;
+    font-size: 35px;
+    color: #55bbbb;
+  }
+  .login__input {
+    margin-bottom: 20px;
+  }
+
+  .input__form {
+    width: 80%;
+    font-size: 28px;
+    border: 1px solid #cdcece;
+  }
+  .login__btn {
+    /* width: 80%; */
+    font-size: 28px;
+    margin-bottom: 20px;
+    background-color: #55bbbb;
+    color: #ffffff;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .index__wrap {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 45px;
+}
+
+.index__outer {
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.index__item {
+  padding: 5px 5px;
+  margin: 20px auto;
+  width: 30%;
+  border: 1px solid #ffffff;
+  border-radius: 25px;
+}
+
+.index__btn {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.index__ttl {
+  margin: auto;
+  font-size: 28px;
+}
+
+.fas {
+  padding: 30px;
+  font-size: 35px;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .index__outer {
+    display: inline;
+  }
+  .index__item {
+    width: 50%;
+  }
+}

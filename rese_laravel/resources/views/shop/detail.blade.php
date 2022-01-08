@@ -2,8 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <title>店舗詳細画面</title>
   </head>
   <body>
     <header>
@@ -28,7 +31,7 @@
           </div>
           <div class="shop__box">
             <div class="item__left">
-              <img src="http://127.0.0.1:8000/storage/img/shop/{{ $shop->img_url }}" alt="shop_img" class="shop_img">
+              <img src="{{ asset('/storage/img/shop/' . $shop->img_url ) }}" alt="shop_img" class="shop_img">
               <div class="category_items">
                 <p class="category_txt">#{{ $shop->areas->name }}</p>
                 <p class="category_txt">#{{ $shop->genres->name }}</p>
@@ -47,7 +50,7 @@
             </div>
           </div>
         @else
-          <form action="/user/reserve" method="get" class="reserve__form flex" >
+          <form action="/user/reserve" method="POST" class="reserve__form flex" >
             <div class="reserve__card">
               <h3 class="reserve__ttl">予約</h3>
               <div class="reserve__item">
@@ -292,6 +295,17 @@
 
 .number {
   display:none;
+}
+
+@media screen and (max-width: 768px) {
+  .shop_detail {
+    display: inline;
+  }
+
+  .flex {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 </style>

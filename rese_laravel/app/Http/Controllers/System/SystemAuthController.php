@@ -11,7 +11,7 @@ class SystemAuthController extends Controller
 {
     public function viewLogin()
     {
-        return view('admin.login');
+        return view('system.login');
     }
     public function postLogin(Request $request)
     {

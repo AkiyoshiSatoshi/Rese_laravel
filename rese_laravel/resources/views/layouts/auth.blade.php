@@ -8,20 +8,15 @@
     <title>Rese</title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body class="container">
-    @component('components.header')
-    @endcomponent
     <main class="main">
         @yield('main')
     </main>
-    @component('components.footer')
-    @endcomponent
 </body>
 
 </html>
