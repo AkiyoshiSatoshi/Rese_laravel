@@ -19,4 +19,14 @@ class Like extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function like($user_id, $shop_id)
+    {
+        $param = [
+            'shop_id' => $shop_id,
+            'user_id' => $user_id,
+        ];
+        $like = Like::create($param);
+        return $like;
+    }
 }
