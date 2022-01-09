@@ -50,8 +50,6 @@ class ShopController extends Controller
                 return view('system.repre_register');
             }
         } catch (\Throwable $th) {
-            // echo $th;
-            echo "Not User registration";
             return view('shop.index',compact('shops'));
         }
     }

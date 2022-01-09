@@ -3,7 +3,7 @@
   background-color: #55bbbb;
   height: 70px;
   align-items: center;
-  padding: 20px;
+  padding: 20px 0 0 0;
   position: sticky;
   top: 0;
 }
@@ -25,6 +25,7 @@
 .header__ttl {
   color: #ffffff;
   font-size: 28px;
+  margin-left: 100px;
 }
 
 .header__right {
@@ -53,3 +54,73 @@
 .search__btn {
   padding: 0 10px;
 }
+
+.hamburger {
+  width: 5%;
+}
+.hamburger a{
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 35px;
+}
+.nav{
+  position: absolute;
+  height: 100vh;
+  width: 50%;
+  left: -50%;
+  background: #55bbbb;
+  transition: .7s;
+  text-align: center;
+}
+.nav ul{
+  padding-top: 80px;
+}
+.nav ul li{
+  list-style-type: none;
+  margin-top: 50px;
+  color: red;
+}
+.menu {
+  display: inline-block;
+  width: 36px;
+  height: 32px;
+  cursor: pointer;
+  position: relative;
+  left: 30px;
+  top: 3.5%;
+}
+.menu__line--top,
+.menu__line--middle,
+.menu__line--bottom {
+  display: inline-block;
+  width: 100%;
+  height: 4px;
+  background-color: #ffffff;
+  position: absolute;
+  transition: 0.5s;
+}
+.menu__line--top {
+  top: 0;
+}
+.menu__line--middle {
+  top: 14px;
+}
+.menu__line--bottom {
+  bottom: 0;
+}
+.menu.open span:nth-of-type(1) {
+  top: 14px;
+  transform: rotate(45deg);
+}
+.menu.open span:nth-of-type(2) {
+  opacity: 0;
+}
+.menu.open span:nth-of-type(3) {
+  top: 14px;
+  transform: rotate(-45deg);
+}
+
+.in{
+  transform: translateX(100%);
+}
+

@@ -1,32 +1,13 @@
+@extends('layouts.app')
 
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <title>店舗詳細画面</title>
-  </head>
-  <body>
-    <header>
-      <h1>RESE</h1>
-      <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <x-jet-dropdown-link href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          this.closest('form').submit();">
-          <i class="fas fa-sign-out-alt icon "></i>
-        </x-jet-dropdown-link>
-      </form>
-    </header>
-
-    <main>
+@section('main')
       <div class="shop_detail">
         <div class="flex shop__card">
           @foreach ($shops as $shop)
           <div class="shop__header">
-            <a href="/" class="arrow"><</a>
+            <div class="icon">
+              <a href="/shop"><i class="fas fa-arrow-alt-circle-left icon__item "></i></a>
+            </div>
             <h3 class="shop__ttl">{{ $shop->name }}</h3>
           </div>
           <div class="shop__box">
@@ -124,188 +105,8 @@
           </form>
         @endif
       </div>
-    </main>
-  </body>
-</html>
+      @endsection
 
-<script>
-  const dateInput = document.getElementById('DateInput');
-  const timeInput = document.getElementById('TimeInput');
-  const numInput = document.getElementById('NumInput');
-  
-  const Date = document.getElementById('Date');
-  const Time = document.getElementById('Time');
-  const number = document.getElementById('Number');
+<script src="{{ asset('js/change.js') }}"></script>
 
-  dateInput.addEventListener('change', function () {
-    Date.textContent = dateInput.value;
-  });
-  timeInput.addEventListener('change', function () {
-    Time.textContent = timeInput.value;
-  });
-  numInput.addEventListener('change', function () {
-    number.textContent = numInput.value + "人";
-  });
-</script>
-
-<style>
-
-
-.icon {
-  color: #55BBBB;
-  font-size: 35px;
-  text-decoration: none;
-}
-
-
-.arrow {
-  color: black;
-  text-decoration: none;
-  border-radius: 10px;
-  font-size: 25px;
-  vertical-align: top;
-  padding: 1px 15px 10px 10px;
-  background: #ffffff;
-  box-shadow:  7px 7px 14px #5a5a5a, -7px -7px 14px #ffffff;
-}
-
-.flex {
-  width: 45%;
-  justify-content: space-around;
-}
-
-.shop_detail {
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.shop__header {
-  display: flex;
-}
-.shop__ttl {
-  margin-left: 20px;
-  font-size: 30px;
-  padding-top: 5px;
-  vertical-align: middle;
-}
-
-.category_items {
-  padding: 20px 0;
-  display: flex;
-}
-
-.shop__pickup {
-  line-height: 30px;
-}
-
-.shop_img {
-  width: 100%;
-}
-
-.shop__box {
-  margin-top: 20px;
-}
-
-.reserve__card {
-  background-color: #55BBBB;
-  margin: 50px auto;
-  border-radius: 10px; 
-  
-}
-
-.reserve__ttl {
-  text-align: left;
-  color: #ffffff;
-  padding: 20px 50px;
-}
-
-
-.auth__card {
-  background-color: #55BBBB;
-  height: 50vh;
-  text-align: center;
-}
-
-.auth__card a {
-  color: #ffffff;
-}
-
-.reserve__item {
-  width: 100%;
-}
-
-.form__card {
-  margin: 0 auto;
-}
-
-.form__item {
-  list-style: none;
-  margin: 10px 0;
-  padding-left: 30px;
-}
-
-.reserve__table {
-  width: 70%;
-  margin: 0 auto;
-  background-color: #24C5C5;
-  padding: 50px 30px;
-  border-radius: 20px;
-}
-
-.reserve__input {
-  border: none;
-  width: 50%;
-  padding: 5px 0;
-}
-
-.reserve__select {
-  border: none;
-  width: 80%;
-  padding: 5px 0;
-}
-
-.reserve__name {
-  width: 20%;
-  text-align: right;
-  color: #ffffff;
-}
-
-.reserving__form { 
-  width: 50%;
-  text-align: center;
-  color: #ffffff;
-}
-
-
-.reserve__btn {
-  width: 100%;
-  border: none;
-  background-color: #078787;
-  border-radius: 0 0 10px 10px;
-  color: #ffffff;
-  margin-top: 200px; 
-  padding:10px 0; 
-}
-
-.time {
-  display:none;
-}
-
-.number {
-  display:none;
-}
-
-@media screen and (max-width: 768px) {
-  .shop_detail {
-    display: inline;
-  }
-
-  .flex {
-    width: 80%;
-    margin: 0 auto;
-  }
-}
-
-</style>
+<link rel="stylesheet" href="{{ asset('css/detail.css') }}">

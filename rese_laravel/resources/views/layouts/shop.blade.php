@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Rese</title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
@@ -14,7 +15,7 @@
 </head>
 
 <body class="container">
-    @component('components.header')
+    @component('components.shop__header')
     @endcomponent
     <main class="main">
         @yield('main')
@@ -24,4 +25,5 @@
 </body>
 
 </html>
+
 <script src="{{ asset('js/hamburger.js') }}"></script>
