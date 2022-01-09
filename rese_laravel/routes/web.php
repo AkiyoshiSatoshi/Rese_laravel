@@ -82,6 +82,11 @@ Route::group(['namespace' => 'user','prefix' => 'user'], function() {
 });
 
 
+//ログアウト機能
+Route::get('/logout',[ShopController::class, 'logout']);
+
+
+
 //店舗代表者機能
 Route::group(['namespace' => 'admin', 'prefix' => 'admin'],function(){
     //店舗代表者ログイン画面

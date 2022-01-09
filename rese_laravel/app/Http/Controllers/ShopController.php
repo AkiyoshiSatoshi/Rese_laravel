@@ -81,4 +81,10 @@ class ShopController extends Controller
             return view('shop.index',compact('shops'));
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect("/");
+    }
 }
