@@ -33,7 +33,7 @@ use App\Http\Controllers\System\SystemController;
 
 //test画面 初期画面
 Route::get('/test', function() {
-    return view('test');
+    return view('user.thanks');
 })->name('test');
 
 Route::get('/',[ShopController::class, 'view'])->name('view');
@@ -51,6 +51,7 @@ Route::group(['middleware' => ''], function ()
 
 //店舗情報取得機能
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/search', [ShopController::class, 'shopsearch']);
 Route::get('/shop/{shop_id}', [ShopController::class, 'shopdetail']);
 
 //ユーザー機能

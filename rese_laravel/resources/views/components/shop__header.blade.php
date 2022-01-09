@@ -11,14 +11,14 @@
     <div class="header__right">
       <form action="/shop/search" method="get">
         <div class="search__wrap">
-          <div class="select__item" >
-            <select name="area" id="" class="select__input" >
+          <div class="" >
+            <select name="area" id="">
               <option value="0">All Area</option>
               <option value="1">東京</option>
               <option value="2">大阪</option>
               <option value="3">福岡</option>
             </select>
-            <select name="genre" id="" class="select__input" >
+            <select name="genre" id="">
               <option value="0">All Genres</option>
               <option value="1">居酒屋</option>
               <option value="2">寿司</option>
@@ -30,7 +30,7 @@
           <div>
             <input type="text" name="name" class="search__input" >
           </div>
-          <button class="search__btn">Search</button>
+          <button>Search</button>
         </div>
       </form>
     </div>

@@ -1,10 +1,55 @@
 .header {
   width: 100%;
   background-color: #55bbbb;
+  height: 70px;
+  align-items: center;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}
+
+.header__wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hamburger {
+  height: 50px;
+  /* background-color: red; */
+}
+
+.header__left {
+  display: flex;
 }
 
 .header__ttl {
   color: #ffffff;
   font-size: 28px;
+}
+
+.header__right {
+  display: flex;
+  margin: 0 20px;
+}
+
+.search__wrap {
+  display: flex;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.search__input {
   
+  border: none;
+  background: #ffffff;
+}
+
+.select__input {
+  border: none;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.search__btn {
+  padding: 0 10px;
 }

@@ -23,7 +23,7 @@ class ReserveController extends Controller
             ];
             //予約保存機能
             $reservation->fill($param)->save();
-            return redirect('/user/mypage');
+            return view('user.thanks');
         } catch (\Throwable $th) {
             echo "error";
         }
