@@ -107,6 +107,4 @@
       </div>
       @endsection
 
-<script src="{{ asset('js/change.js') }}"></script>
-
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}">

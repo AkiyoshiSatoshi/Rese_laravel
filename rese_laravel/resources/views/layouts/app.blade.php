@@ -24,4 +24,5 @@
 </body>
 
 </html>
+<script src="{{ asset('js/change.js') }}"></script>
 <script src="{{ asset('js/hamburger.js') }}"></script>
