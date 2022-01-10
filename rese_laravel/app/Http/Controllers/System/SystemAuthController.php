@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\LoginRequest;
 
 class SystemAuthController extends Controller
 {
@@ -13,7 +14,7 @@ class SystemAuthController extends Controller
     {
         return view('system.login');
     }
-    public function postLogin(Request $request)
+    public function postLogin(LoginRequest $request)
     {
         try {
             $system = User::where('email', $request->email)->first();

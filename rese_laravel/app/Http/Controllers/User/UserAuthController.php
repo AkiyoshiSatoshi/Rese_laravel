@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerification;
 
+use App\Http\Requests\LoginRequest;
+
 class UserAuthController extends Controller
 {
     //Pre-Register
@@ -39,7 +41,7 @@ class UserAuthController extends Controller
     }
     
     //Login
-    public function userLogin(Request $request)
+    public function userLogin(LoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         $auth_code = $user->access_auth;
