@@ -123,7 +123,7 @@
                   <td>{{ $item->users->name }}</td>
                   <td>{{$item->start_at }}</td>
                   <td>{{$item->num_of_users }}</td>
-                  <td><a class="" href="/admin/mail/form/{{ $user->id }}">メール送信</a></td>
+                  <td><a class="" href="/admin/mail/form/{{ $item->users->id }}">メール送信</a></td>
                 </tr>
                 @endforeach
               </tbody>

@@ -4,24 +4,24 @@
 
 @section('main')
   <div class="shops">
-  @foreach ($shops as $item)
+  @foreach ($shops as $shop)
     <div class="shop_wrap">
-      <img src="{{ asset('/storage/img/shop/' . $item->img_url ) }}" alt="shop_img" class="shop_img" >
+      <img src="{{ asset('/storage/img/shop/' . $shop->img_url ) }}" alt="shop_img" class="shop_img" >
       <div class="shop_item">
-        <h2 class="shop_name">{{ $item->name }}</h2>
+        <h2 class="shop_name">{{ $shop->name }}</h2>
         <div class="category_items">
-          <h3 class="category_txt">#{{ $item->areas->name }}</h3>
-          <h3 class="category_txt">#{{ $item->genres->name }}</h3>
+          <h3 class="category_txt">#{{ $shop->areas->name }}</h3>
+          <h3 class="category_txt">#{{ $shop->genres->name }}</h3>
         </div>
         <div class="shop_detail">
-          <a type="submit" class="detail_btn" href="/shop/{{$item->id}}">詳しく見る</a>
+          <a type="submit" class="detail_btn" href="/shop/{{$shop->id}}">詳しく見る</a>
           @if (empty(Auth::id()))
             <a href="/login"><i class="far fa-heart heart_img"></i></a>
           @else
-            @if($likes[$loop->iteration]==1)
-              <a href="/user/unlike/{{$item->id}}"><i class="fas fa-heart heart_img"></i></a>
+            @if(count($shop->likes)==1)
+              <a href="/user/unlike/{{$shop->id}}"><i class="fas fa-heart heart_img"></i></a>
             @else
-              <a href="/user/like/{{$item->id}}"><i class="far fa-heart heart_img"></i></a>
+              <a href="/user/like/{{$shop->id}}"><i class="far fa-heart heart_img"></i></a>
             @endif
           @endif
         </div>

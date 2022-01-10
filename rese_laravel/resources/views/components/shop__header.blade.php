@@ -28,13 +28,13 @@
         <div class="search__wrap">
           <div class="select__item" >
             <select name="area" id="" class="select__input" >
-              <option value="0">All Area</option>
+              <option value="">All Area</option>
               <option value="1">東京</option>
               <option value="2">大阪</option>
               <option value="3">福岡</option>
             </select>
             <select name="genre" id="" class="select__input" >
-              <option value="0">All Genres</option>
+              <option value="">All Genres</option>
               <option value="1">居酒屋</option>
               <option value="2">寿司</option>
               <option value="3">イタリアン</option>
