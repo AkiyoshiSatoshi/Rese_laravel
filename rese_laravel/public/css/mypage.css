@@ -1,0 +1,174 @@
+
+input {
+  border: none;
+  text-align: right;
+  background-color:transparent;
+}
+
+.mypage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.mypage__left {
+  width: 50%;
+}
+
+.mypage__ttl {
+  margin-top: 20px;
+  color: #55BBBB;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.mypage__left h2 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.reserve__wrap {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.reserve__card {
+  background-color: #55BBBB;
+  border-radius: 25px;
+  padding: 10px 20px;
+  width: 80%;
+  margin: 0 auto 20px auto;
+}
+.theme {
+  color: white;
+}
+
+.reserve__icon {
+  margin-left: 10px;
+  font-size: 24px;
+}
+
+.reserve__change_txt {
+  color: #ffffff;
+}
+
+.reserve__item {
+  display: flex;
+}
+
+.reserve__item_head {
+  display: flex;
+  justify-content: space-around;
+  
+}
+.reserve__table {
+  width: 70%;
+  margin: 0 auto;
+  background-color: transparent;
+  padding: 50px 30px;
+  border-radius: 20px;
+}
+
+.reserve__name {
+  width: 20%;
+  text-align: right;
+  color: #ffffff;
+}
+
+.reserved__form { 
+  width: 30%;
+  text-align: right;
+  color: #ffffff;
+}
+
+.reserved__form input {
+  color: #ffffff;
+}
+
+
+.mypage__right {
+  width: 50%;
+}
+
+.mypage__right h2 {
+  text-align: center;
+}
+
+.like__wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shop__wrap {
+  width: 40%;
+  margin: 20px auto;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow:  5px 5px 22px #808080,
+              -5px -5px 22px #ffffff;
+}
+
+.shop__item {
+  padding: 10px 20px;
+  justify-content: space-around;
+}
+
+.delete__btn {
+  color: #ffffff;
+}
+
+.shop_name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+.shop__img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
+.category_items {
+  display: flex;
+}
+
+.shop_detail {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.detail_btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color:#55BBBB;
+  color: azure;
+}
+
+.heart_img {
+  font-size: 35px;
+  color: pink;
+}
+
+@media screen and (max-width:768px) {
+  .mypage {
+    display: inline;
+  }
+
+  .mypage__left {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .mypage__right {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .shop__wrap {
+    width: 80%;
+  }
+}

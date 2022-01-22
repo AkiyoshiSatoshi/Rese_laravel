@@ -19,27 +19,19 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::all();
+        $shops = Shop::getShops(Auth::id());
+        // dd($shops);
         //ユーザー未登録遷移
         try {
             $admin = Auth::user()->access_auth;
             $id = Auth::user()->id;
             if ($admin == 0 ) {
-                $likes=array();
-                $likes[0]='dummy';
-                foreach($shops as $shop)
-                {
-                    $like=Like::where('user_id',$id)->where('shop_id',$shop['id'])->first();
-                    if(!empty($like)){
-                        $like=1;
-                    }else{
-                        $like=0;
-                    }
-                    array_push($likes,$like);
-                }
-                return view('shop.index', compact('shops', 'likes'));
+                $shops = Shop::getShops(Auth::id());
+                return view('shop.index', compact('shops'));
+
             } else if ( $admin == 1) {
-                $user = User::find($id)->first();
-                $owner = Shop::where('owner_id', $id)->first();
+                $user = User::find(Auth::id())->first();
+                $owner = Shop::where('owner_id',Auth::id())->first();
                 if ($owner) {
                     $reservation = Reservation::where('shop_id', $owner->id)->get();
                     return view('admin.index',compact('owner', 'reservation','user'));
@@ -50,8 +42,6 @@ class ShopController extends Controller
                 return view('system.repre_register');
             }
         } catch (\Throwable $th) {
-            // echo $th;
-            echo "Not User registration";
             return view('shop.index',compact('shops'));
         }
     }
@@ -69,6 +59,17 @@ class ShopController extends Controller
         $area = $request->area;
         $genre = $request->genre;
 
+        // $test = Shop::where('name',$name)->pluck('name');
+        // dd($test);
+
+        Shop::shopsearch($name, $area, $genre);
+
+        if (Auth::check()) {
+            
+        } else {
+            return view('shop.index',compact('shop'));
+        }
+
         if ($area == 0 && $genre == 0 ) {
             $shops = Shop::where('name','like','%'.$name.'%')->get();
             return view('shop.index',compact('shops'));
@@ -82,5 +83,11 @@ class ShopController extends Controller
             $shops = Shop::all();
             return view('shop.index',compact('shops'));
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect("/");
     }
 }

@@ -1,0 +1,160 @@
+
+.icon {
+  color: #55BBBB;
+  font-size: 35px;
+  text-decoration: none;
+}
+
+
+.flex {
+  width: 45%;
+  justify-content: space-around;
+}
+
+.shop_detail {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.shop__header {
+  display: flex;
+}
+
+
+.shop__card {
+  display: block;
+}
+
+.icon {
+  width: 50px;
+}
+
+.icon__item {
+  color: #55BBBB;
+}
+
+.shop__ttl {
+  margin-left: 20px;
+  font-size: 30px;
+  padding-top: 5px;
+  vertical-align: middle;
+}
+
+.category_items {
+  padding: 20px 0;
+  display: flex;
+}
+
+.shop__pickup {
+  line-height: 30px;
+}
+
+.shop_img {
+  width: 100%;
+}
+
+.shop__box {
+  margin: 20px 0;
+}
+
+.reserve__card {
+  background-color: #55BBBB;
+  margin: 50px auto;
+  border-radius: 10px; 
+  
+}
+
+.reserve__ttl {
+  text-align: left;
+  color: #ffffff;
+  padding: 20px 50px;
+}
+
+
+.auth__card {
+  background-color: #55BBBB;
+  height: 50vh;
+  text-align: center;
+}
+
+.auth__card a {
+  color: #ffffff;
+}
+
+.reserve__item {
+  width: 100%;
+}
+
+.form__card {
+  margin: 0 auto;
+}
+
+.form__item {
+  list-style: none;
+  margin: 10px 0;
+  padding-left: 30px;
+}
+
+.reserve__table {
+  width: 70%;
+  margin: 0 auto;
+  background-color: #24C5C5;
+  padding: 50px 30px;
+  border-radius: 20px;
+}
+
+.reserve__input {
+  border: none;
+  width: 50%;
+  padding: 5px 0;
+}
+
+.reserve__select {
+  border: none;
+  width: 80%;
+  padding: 5px 0;
+}
+
+.reserve__name {
+  width: 20%;
+  text-align: right;
+  color: #ffffff;
+}
+
+.reserving__form { 
+  width: 50%;
+  text-align: center;
+  color: #ffffff;
+}
+
+
+.reserve__btn {
+  width: 100%;
+  border: none;
+  background-color: #078787;
+  border-radius: 0 0 10px 10px;
+  color: #ffffff;
+  margin-top: 200px; 
+  padding:10px 0; 
+}
+
+.time {
+  display:none;
+}
+
+.number {
+  display:none;
+}
+
+@media screen and (max-width: 768px) {
+  .shop_detail {
+    display: inline;
+  }
+
+  .flex {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

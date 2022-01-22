@@ -38,16 +38,16 @@ Route::get('/test', function() {
 
 Route::get('/',[ShopController::class, 'view'])->name('view');
 
-Route::get('/preregister', [RegisterController::class, 'userStore'])->name('eeee');
+Route::get('/preregister', [RegisterController::class, 'userStore']);
 
 //２段階認証機能
-Route::group(['middleware' => ''], function ()
-{
+// Route::group(['middleware' => ''], function ()
+// {
     //２段階認証機能
     Route::post('/premail', [RegisterController::class, 'preStore']);
     Route::get('/register/verify/{token}', [RegisterController::class, 'view']);
     Route::post('/register/store', [RegisterController::class, 'create']);
-});
+// });
 
 //店舗情報取得機能
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
@@ -80,6 +80,11 @@ Route::group(['namespace' => 'user','prefix' => 'user'], function() {
     Route::get('like/{shop_id}', [LikeController::class, 'like']);
     Route::get('unlike/{shop_id}', [LikeController::class, 'unlike']);
 });
+
+
+//ログアウト機能
+Route::get('/logout',[ShopController::class, 'logout']);
+
 
 
 //店舗代表者機能

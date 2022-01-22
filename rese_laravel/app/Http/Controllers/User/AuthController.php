@@ -21,6 +21,7 @@ class AuthController extends Controller
     //仮登録
     public function preStore(Request $request)
     {
+        dd($request->all());
         $auth_code = 0;
         $password = $request->password;
         $password_checked = $request->password_confirmation;

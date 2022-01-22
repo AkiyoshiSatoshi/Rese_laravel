@@ -1,16 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('main')
-<h2>仮登録</h2>
+<div class="login__wrap">
 
-<form action="/premail" method="post">
-  @csrf
-  <label for="">Email</label>
-  <input type="email" name="email">
-  <label for="">Password</label>
-  <input id="password" type="password" name="password" required autocomplete="new-password" >
-  <label for="">Password Confirmation</label>
-  <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-  <input type="submit" value="仮登録">
-</form>
+  <h2 class="login__ttl" >Temporary registration</h2>
+
+  <form action="/premail" method="post">
+    @csrf
+    <div class="input">
+      <input class="input__form" type="email" name="email" required autofocus placeholder="Email" >
+    </div>
+    <div class="input">
+      <input class="input__form"  id="password" type="password" name="password" required autocomplete="new-password" placeholder="Password" >
+    </div>
+    <div class="input">
+      <input class="input__form" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Password Confirmation" >
+    </div>
+    <button class="login__btn" >Temporary Registration</button>
+  </form>
+  <div class="btn__wrap">
+    <p>Already have an account? <a href="/user/login" class="signIn__txt">Log-In&#x25B7;</a></p>
+  </div>
+</div>
 @endsection

@@ -21,6 +21,7 @@ class RegisterController extends Controller
 
     public function preStore(Request $request)
     {
+        
         $auth_code = 0;
         $password = $request->password;
         $password_checked = $request->password_confirmation;

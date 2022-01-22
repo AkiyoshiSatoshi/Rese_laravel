@@ -18,7 +18,7 @@
   <main>
     <div class="mail-send__wrap">
       <h2>メール送信フォーム</h2>
-      <form action="/mail/send" method="post">
+      <form action="/admin/mail/send" method="post">
         @csrf
         <label for="">Title:</label>
         <input type="text" name="title">
