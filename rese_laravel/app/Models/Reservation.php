@@ -20,4 +20,10 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function deleteReserve($shop_id, $user_id)
+    {
+        $reserve = Reservation::where('shop_id', $shop_id)->where('user_id', $user_id)->first();
+        $reserve->delete();
+    }
 }

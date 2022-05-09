@@ -31,8 +31,9 @@ class ReserveController extends Controller
 
     public function remove($id)
     {
-        $reserve = Reservation::where('shop_id', $id)->where('user_id', Auth::id())->first();
-        $reserve->delete();
+        // $reserve = Reservation::where('shop_id', $id)->where('user_id', Auth::id())->first();
+        $reserve = Resevation::deleteReserve($id, Auth::id());
+        // $reserve->delete();
         return redirect()->back();
     }
     public function update($id)
