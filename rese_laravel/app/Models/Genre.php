@@ -8,9 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     use HasFactory;
-
-    public function shops()
-    {
-        // return $this->(Shop::class,);
-    }
 }
