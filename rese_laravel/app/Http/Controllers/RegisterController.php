@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerification;
 
+use App\Http\Requests\RegisterRequest;
+
 class RegisterController extends Controller
 {
     public function userStore()
@@ -19,7 +21,7 @@ class RegisterController extends Controller
         return view('user.pre_register');
     }
 
-    public function preStore(Request $request)
+    public function preStore(RegisterRequest $request)
     {
         
         $auth_code = 0;

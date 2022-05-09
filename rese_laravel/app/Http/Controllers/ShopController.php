@@ -20,7 +20,6 @@ class ShopController extends Controller
     {
         $shops = Shop::all();
         $shops = Shop::getShops(Auth::id());
-        // dd($shops);
         //ユーザー未登録遷移
         try {
             $admin = Auth::user()->access_auth;
@@ -58,9 +57,6 @@ class ShopController extends Controller
         $name = $request->name;
         $area = $request->area;
         $genre = $request->genre;
-
-        // $test = Shop::where('name',$name)->pluck('name');
-        // dd($test);
 
         Shop::shopsearch($name, $area, $genre);
 

@@ -23,7 +23,6 @@ class UserAuthController extends Controller
     //仮登録
     public function preStore(Request $request)
     {
-        $auth_code = 0;
         $password = $request->password;
         $password_checked = $request->password_confirmation;
         if ($password == $password_checked) {
@@ -31,7 +30,7 @@ class UserAuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'email_verify_token' => base64_encode($request->email),
-                'access_auth' => $auth_code,
+                'access_auth' => 0,
             ]);
             Mail::to($request->email)->send(new EmailVerification($user));
             return view('user.mail_confirm');

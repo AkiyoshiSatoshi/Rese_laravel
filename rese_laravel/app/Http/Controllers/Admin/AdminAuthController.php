@@ -15,7 +15,6 @@ class AdminAuthController extends Controller
     {
         try {
             $admin = User::where('email', $request->email)->first();
-            // dd($admin);
             $auth_code = $admin->access_auth;
             $credentials = $request->only('email','password');
             if ( $auth_code == "1" && Auth::attempt($credentials)) {
