@@ -9,6 +9,7 @@ use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ReserveController;
 use App\Http\Controllers\User\LikeController;
+use App\Http\Controllers\User\StripeController;
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
@@ -29,6 +30,9 @@ use App\Http\Controllers\System\SystemController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/stripe', [StripeController::class, 'viewStripe']);
+Route::get('/stripe', [StripeController::class, 'postStripe']);
 
 
 //test画面 初期画面
